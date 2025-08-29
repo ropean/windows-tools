@@ -1,0 +1,33 @@
+name: Create Release and Upload EXEs
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create Release and Upload Files
+        uses: softprops/action-gh-release@v1
+        with:
+          files: apps/*.exe
+          draft: false
+          prerelease: false
+          body: |
+            ## 🚀 Release ${{ github.ref_name }}
+
+            ### 📦 Downloads
+            Simply download the .exe file below to use it.
+
+            > Note: the source code zip file includes entire repository.
+          generate_release_notes: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
