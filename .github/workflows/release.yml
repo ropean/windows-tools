@@ -18,7 +18,7 @@ jobs:
       - name: Create Release and Upload Files
         uses: softprops/action-gh-release@v1
         with:
-          files: *.exe
+          files: apps/*.exe
           draft: false
           prerelease: false
           body: |
